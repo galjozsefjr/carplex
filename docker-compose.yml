@@ -21,6 +21,7 @@ services:
     #restart: unless-stopped
     volumes:
       - ./frontend:/var/www/html/frontend
+      - /var/www/html/frontend/node_modules
     depends_on:
       - backend
     networks:
