@@ -1,9 +1,10 @@
-import { Button, HStack } from '@chakra-ui/react';
+import { SearchLayout } from '@/components/search/search-layout';
+import { SearchPage } from '@/components/search/search-page';
 
 export default function Home() {
   return (
-    <HStack>
-      <Button variant="outline">Click here</Button>
-    </HStack>
+    <SearchLayout>
+      <SearchPage />
+    </SearchLayout>
   );
 }

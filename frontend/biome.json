@@ -18,7 +18,16 @@
   },
   "files": {
     "ignoreUnknown": false,
-    "includes": ["./**/*.{js,jsx,ts,tsx,json,md,mdx,yml,yaml,html,css,scss,sass}", "!**/dist", "!**/node_modules", "!**/public", "!**/public/**/*", "!**/.next"]
+    "includes": [
+      "./**/*.{js,jsx,ts,tsx,json,md,mdx,yml,yaml,html,css,scss,sass}",
+      "!**/dist",
+      "!**/out",
+      "!**/build",
+      "!**/node_modules",
+      "!**/public",
+      "!**/public/**/*",
+      "!**/.next"
+    ]
   },
   "formatter": {
     "attributePosition": "auto",
@@ -161,7 +170,7 @@
   },
   "overrides": [
     {
-      "includes": ["./components/**/*", "./layout/**/*", "./hooks/**/*", "./lib/**/*", "./utils/**/*", "./providers/**/*", "./stores/**/*"],
+      "includes": ["./src/**/*", "./app/**/*"],
       "linter": {
         "rules": {
           "style": {
