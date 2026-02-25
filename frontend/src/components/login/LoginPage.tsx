@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation';
 import { type FC, useCallback, useState } from 'react';
 import { useAuthContext } from '@/auth/auth.context';
-import { LoginForm } from './login-form';
+import { LoginForm } from './LoginForm';
 
 export const LoginPage: FC = () => {
   const { login } = useAuthContext();
@@ -12,13 +12,15 @@ export const LoginPage: FC = () => {
 
   const onLogin = useCallback(
     async (username: string, password: string): Promise<boolean> => {
-      const error = await login(username, password);
-      if (error) {
-        setError(error);
+      setError('');
+      try {
+        await login(username, password);
+        navigate('/');
+        return true;
+      } catch {
+        setError('Hibás felhasználónév vagy jelszó');
         return false;
       }
-      navigate('/profile');
-      return true;
     },
     [navigate, login]
   );

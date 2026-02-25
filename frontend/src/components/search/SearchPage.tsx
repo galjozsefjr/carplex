@@ -1,7 +1,7 @@
 'use client';
 import { Container, Heading } from '@chakra-ui/react';
 import type { FC } from 'react';
-import { SearchBox } from './search-box';
+import { SearchBox } from './SearchBox';
 
 export const SearchPage: FC = () => {
   const onSearch = () => {

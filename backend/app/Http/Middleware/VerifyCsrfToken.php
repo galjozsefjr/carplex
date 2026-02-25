@@ -12,6 +12,11 @@ class VerifyCsrfToken extends Middleware
      * @var array<int, string>
      */
     protected $except = [
-        //
+        /**
+         * disable CSRF token validation for API calls
+         * better solution would be to use JWT tokens for the communication
+         * due to old PHP version (7.3) it's not worth the effort for this project - does not go to production
+         */
+        'api/*'
     ];
 }

@@ -7,6 +7,7 @@ import { inputTheme } from './components/input';
 import { menuTheme } from './components/menu';
 import { modalTheme } from './components/modal';
 import { numberInputTheme } from './components/number-input';
+import { selectTheme } from './components/select';
 import { textAreaTheme } from './components/textarea';
 import { transparentize } from './utils/transparentize';
 
@@ -29,7 +30,8 @@ const colorTokens = {
   background: {
     default: colors.gray['500'],
     medium: colors.gray['600'],
-    dark: colors.gray['800']
+    dark: colors.gray['800'],
+    input: transparentize(colors.gray['700'], 80.31)
   },
   border: {
     default: colors.gray['200'],
@@ -93,6 +95,7 @@ export const theme = extendTheme({
     Menu: menuTheme,
     Modal: modalTheme,
     NumberInput: numberInputTheme,
-    Textarea: textAreaTheme
+    Textarea: textAreaTheme,
+    Select: selectTheme
   }
 });

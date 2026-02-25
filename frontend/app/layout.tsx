@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 import './globals.css';
 import { Container, Flex } from '@chakra-ui/react';
 import { AuthProvider } from '@/auth/auth.provider';
-import { CarPlexLogo } from '@/components/logo/carplex-logo';
-import { ProfileButton } from '@/components/profile/profile-button';
+import { CarPlexLogo } from '@/components/logo/CarplexLogo';
+import { ProfileButton } from '@/components/profile/ProfileButton';
 import { fonts } from '@/theme/fonts';
 import { ThemeProvider } from '@/theme/theme-provider';
 

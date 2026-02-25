@@ -20,7 +20,7 @@ export const ProfileButton: FC = () => {
   return (
     <Box>
       <Link as={NavLink} href="/profile">
-        Üdv, {user.lastName}
+        Üdv, {user.name}
       </Link>
       <IconButton aria-label="Kilépés" icon={<ExternalLinkIcon />} marginLeft="2" onClick={logout} size="sm" variant="transparent" />
     </Box>
