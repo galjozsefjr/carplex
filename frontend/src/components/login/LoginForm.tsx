@@ -2,7 +2,7 @@ import { Box, Button, ButtonGroup, FormControl, FormErrorMessage, FormLabel, Inp
 import { yupResolver } from '@hookform/resolvers/yup';
 import type { FC } from 'react';
 import { useForm } from 'react-hook-form';
-import { loginFormValidate } from './login-form-validate';
+import { loginFormValidate } from './loginFormValidate';
 
 export interface LoginFormProps {
   onLogin: (username: string, password: string) => Promise<boolean>;

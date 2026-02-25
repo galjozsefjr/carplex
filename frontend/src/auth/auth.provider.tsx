@@ -1,32 +1,27 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { type FC, type PropsWithChildren, useCallback, useEffect, useEffectEvent, useMemo, useState } from 'react';
+import { type FC, type PropsWithChildren, useCallback, useEffect } from 'react';
 import { useLocalStorage } from 'usehooks-ts';
-import { type AuthContext, AuthContextProvider, type User } from './auth.context';
-import { createLoginToken, getUserProfile } from './auth.utils';
+import { useLogin } from '@/hooks/useLogin';
+import { useUserProfile } from '@/hooks/useUserProfile';
+import { type AuthContext, AuthContextProvider } from './auth.context';
 
 const AUTH_KEY = 'moviesApiAuthToken';
 
 export const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
   const [authToken, setAuthToken, removeAuthToken] = useLocalStorage(AUTH_KEY, '');
-  const [user, setUser] = useState<User | null>(null);
-  const [inProgress, setInprogress] = useState(!!authToken);
   const { push: navigate } = useRouter();
+  const { trigger: createLoginToken, isMutating } = useLogin();
+  const { data: user, isLoading, error, mutate } = useUserProfile(authToken ?? null);
 
   const login: AuthContext['login'] = useCallback(
     async (username: string, password: string) => {
-      try {
-        setInprogress(true);
-        const authToken = await createLoginToken(username, password);
-        setAuthToken(authToken);
-        return null;
-      } catch (error) {
-        setInprogress(false);
-        return (error as Error)?.message;
-      }
+      const { accessToken } = await createLoginToken({ username, password });
+      setAuthToken(accessToken);
+      return true;
     },
-    [setAuthToken]
+    [setAuthToken, createLoginToken]
   );
 
   const logout: AuthContext['logout'] = useCallback(() => {
@@ -34,36 +29,20 @@ export const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
     navigate('/');
   }, [navigate, removeAuthToken]);
 
-  const state: AuthContext = useMemo(
-    () => ({
-      login,
-      logout,
-      authToken,
-      user,
-      inProgress
-    }),
-    [login, logout, user, inProgress, authToken]
-  );
-
-  const handleUserProfile = useEffectEvent(async (authToken: string) => {
-    setInprogress(true);
-    try {
-      const userProfile = await getUserProfile(authToken);
-      setUser(userProfile);
-    } catch {
-      removeAuthToken();
-    } finally {
-      setInprogress(false);
-    }
-  });
+  const state: AuthContext = {
+    login,
+    logout,
+    authToken,
+    user: user ?? null,
+    inProgress: isMutating || isLoading || (!error && !user)
+  };
 
   useEffect(() => {
     if (!authToken) {
-      setUser(null);
       return;
     }
-    handleUserProfile(authToken);
-  }, [authToken]);
+    mutate();
+  }, [authToken, mutate]);
 
   return <AuthContextProvider value={state}>{children}</AuthContextProvider>;
 };

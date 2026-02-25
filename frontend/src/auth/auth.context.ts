@@ -3,17 +3,16 @@
 import { createContext, useContext } from 'react';
 
 export interface User {
-  userId: string;
+  id: string;
   email: string;
-  firstName: string;
-  lastName: string;
+  name: string;
 }
 
 export interface AuthContext {
   user: User | null;
   inProgress: boolean;
   authToken?: string;
-  login: (username: string, password: string) => Promise<string | null>;
+  login: (username: string, password: string) => Promise<boolean>;
   logout: () => void;
 }
 
