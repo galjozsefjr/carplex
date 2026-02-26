@@ -2,20 +2,12 @@ import { AspectRatio, Box, Flex, Heading, HStack, Image, Text } from '@chakra-ui
 import type { FC } from 'react';
 
 import type { Movie } from '@/types/Movie';
+import { formatRuntime } from '@/utils/runtime';
 import { CertificationCircle } from './CertificationCircle';
 
 export interface MovieDescriptionProps {
   movie: Movie;
 }
-
-const formatRuntime = (runtime: number | null): string => {
-  if (!runtime) {
-    return '';
-  }
-  const runtimeMins = runtime % 60;
-  const runtimeHours = Math.round((runtime - runtimeMins) / 60);
-  return `${runtimeHours}h ${runtimeMins}min`;
-};
 
 export const MovieDescription: FC<MovieDescriptionProps> = ({ movie }) => {
   const releaseDate = new Date(movie.release_date);
