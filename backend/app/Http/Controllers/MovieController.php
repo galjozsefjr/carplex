@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Movie;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 
 class MovieController extends Controller
 {
@@ -22,27 +21,35 @@ class MovieController extends Controller
         return response()->json($newMovie, 201);
     }
 
-    public function show($id)
+    public function show($movieId)
     {
-        return Movie::find($id);
-    }
-
-    public function update(Request $request, $id)
-    {
-        $movie = Movie::find($id);
+        $movie = Movie::find($movieId);
         if (!$movie) {
             return response()->json(
                 ['message' => 'Movie not found'],
                 404
             );
         }
-        $request->validate(Movie::validatationSchema());
-        return $movie->update($request->all());
+        return response()->json($movie);
     }
 
-    public function destroy($id)
+    public function update(Request $request, $movieId)
     {
-        $isRemoved = Movie::destroy($id);
+        $movie = Movie::find($movieId);
+        if (!$movie) {
+            return response()->json(
+                ['message' => 'Movie not found'],
+                404
+            );
+        }
+        $movieInfo = $request->validate(Movie::validatationSchema());
+        $movie->update($movieInfo);
+        return Movie::find($movieId);
+    }
+
+    public function destroy($movieId)
+    {
+        $isRemoved = Movie::destroy($movieId);
         if (!$isRemoved) {
             return response()->json(
                 ['message' => 'Movie not found'],

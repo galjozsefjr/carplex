@@ -1,4 +1,5 @@
 import type { Certification } from './Certification';
+import type { Paginated } from './Paginated';
 
 export type Movie = {
   id: number;
@@ -15,18 +16,4 @@ export type Movie = {
 
 export type CreateMovie = Omit<Movie, 'id' | 'created_at' | 'updated_at'>;
 
-export type MovieListResult = {
-  current_page: number;
-  first_page_url: string;
-  from: number;
-  to: number;
-  per_page: number;
-  total: number;
-  last_page: number;
-  data: Movie[];
-
-  last_page_url: string;
-  next_page_url: string | null;
-  prev_page_url: string | null;
-  path: string;
-};
+export type MovieListResult = Paginated<Movie>;

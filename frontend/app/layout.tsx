@@ -3,6 +3,7 @@ import './globals.css';
 import { Container, Flex } from '@chakra-ui/react';
 import { AuthProvider } from '@/auth/auth.provider';
 import { CarPlexLogo } from '@/components/logo/CarplexLogo';
+import { HeaderNavigationBar } from '@/components/navigation/HeaderNavigationBar';
 import { ProfileButton } from '@/components/profile/ProfileButton';
 import { fonts } from '@/theme/fonts';
 import { ThemeProvider } from '@/theme/theme-provider';
@@ -23,8 +24,9 @@ export default function RootLayout({
         <ThemeProvider>
           <AuthProvider>
             <Container maxWidth="7xl">
-              <Flex alignItems="center" justifyContent="space-between" marginBottom="4">
+              <Flex alignItems="center" gap="10" justifyContent="space-between" marginBottom="4">
                 <CarPlexLogo />
+                <HeaderNavigationBar />
                 <ProfileButton />
               </Flex>
               {children}

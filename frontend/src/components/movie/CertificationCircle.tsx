@@ -4,6 +4,8 @@ import type { Certification } from '@/types/Certification';
 
 export interface CertificationCircleProps {
   certification?: Certification | null;
+  size?: string | number;
+  fontSize?: string;
 }
 
 const RatingStyle = {
@@ -11,12 +13,12 @@ const RatingStyle = {
   borderRadius: '50%',
   borderColor: 'white',
   flexShrink: 0,
-  fontSize: 'xl',
   fontWeight: 300,
-  lineHeight: '3em',
-  height: '3em',
-  textAlign: 'center',
-  width: '3em'
+  textAlign: 'center'
 };
 
-export const CertificationCircle: FC<CertificationCircleProps> = ({ certification }) => <Box sx={RatingStyle}>{certification ?? '?'}</Box>;
+export const CertificationCircle: FC<CertificationCircleProps> = ({ certification, size = '3em', fontSize = 'xl' }) => (
+  <Box fontSize={fontSize} height={size} lineHeight={size} sx={RatingStyle} width={size}>
+    {certification ?? '?'}
+  </Box>
+);

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Validation\Rule;
 
 class Movie extends Model
@@ -31,5 +32,10 @@ class Movie extends Model
             'runtime' => ['required', 'numeric', 'min:0', 'max:1440'],
             'certification' => ['nullable', 'string', Rule::in(['KN', '6', '12', '16', '18', 'X'])],
         ];
+    }
+
+    public function screenings(): HasMany
+    {
+        return $this->hasMany(Screening::class, 'movie_id', 'id');
     }
 }

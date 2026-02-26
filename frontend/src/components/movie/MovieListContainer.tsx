@@ -18,7 +18,7 @@ export type MovieListContainerProps = Readonly<{
 }>;
 
 export const MovieListContainer: FC<MovieListContainerProps> = ({ page }) => {
-  const { data: searchResult } = useMovies(page, { refreshInterval: 100000, revalidateOnFocus: false });
+  const { data: searchResult } = useMovies(page, { refreshInterval: 0, revalidateOnFocus: false });
   const { user } = useAuthContext();
   const { push: navigate } = useRouter();
   const gotoPage = useCallback(
