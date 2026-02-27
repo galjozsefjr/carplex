@@ -22,7 +22,8 @@ const nextConfig: NextConfig = {
         destination: `${process.env.API_URL}/sanctum/csrf-cookie`
       }
     ];
-  }
+  },
+  output: process.env.NODE_ENV === 'production' ? 'standalone' : 'export'
 };
 
 export default nextConfig;

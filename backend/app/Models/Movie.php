@@ -27,7 +27,7 @@ class Movie extends Model
             'title' => ['required', 'string', 'max:120'],
             'tagline' => ['max:200', 'string', 'nullable'],
             'release_date' => ['required', 'date'],
-            'poster_path' => ['required', 'max:120', 'string'],
+            'poster_path' => ['required', 'max:120', 'string', 'url:http,https'],
             'overview' => ['required', 'string', 'nullable'],
             'runtime' => ['required', 'numeric', 'min:0', 'max:1440'],
             'certification' => ['nullable', 'string', Rule::in(['KN', '6', '12', '16', '18', 'X'])],
