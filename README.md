@@ -18,6 +18,9 @@ docker exec -it laravel php artisan migrate:fresh --seed
 
 The application will be available on your local machine using [http://localhost:8080/](http://localhost:8080/)
 
+## API Documentation
+The API documentation can be found in OAS format `backend/carplex.swagger.json` file. Use [Swagger](https://editor.swagger.io/) to visualize.
+
 ## Development setup
 
 ### Prerequisites
