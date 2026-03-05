@@ -17,6 +17,15 @@ class MovieController extends Controller
     public function store(Request $request)
     {
         $movieData = $request->validate(Movie::validatationSchema());
+        $existing = Movie::where([
+            ['title', 'LIKE', $movieData['title']],
+            ['release_date', '=', $movieData['release_date']],
+        ])->count();
+        if ($existing > 0) {
+            return response()->json([
+                'message' => 'Movie already exists'
+            ], 409);
+        }
         $newMovie = Movie::create($movieData);
         return response()->json($newMovie, 201);
     }
@@ -43,6 +52,16 @@ class MovieController extends Controller
             );
         }
         $movieInfo = $request->validate(Movie::validatationSchema());
+        $existing = Movie::where([
+            ['title', 'LIKE', $movieInfo['title']],
+            ['release_date', '=', $movieInfo['release_date']],
+            ['id', '<>', $movieId]
+        ])->count();
+        if ($existing > 0) {
+            return response()->json([
+                'message' => 'Movie already exists'
+            ], 409);
+        }
         $movie->update($movieInfo);
         return Movie::find($movieId);
     }

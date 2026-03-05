@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class ScreeningController extends Controller
 {
 
-    const SCREENING_PAGE_LIMIT = 20;
+    const SCREENING_PAGE_LIMIT = 10;
 
     public function index(Request $request)
     {
